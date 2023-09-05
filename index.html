@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Square</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+        }
+        #back-link {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="back-link">
+        <a href="https://yaboi870.github.io/Ultraclip/">BACK</a>
+    </div>
+    <div id="box"></div>
+
+    <script>
+        const box = document.getElementById('box');
+        let x = 0;
+        let y = 0;
+        let xSpeed = 5;
+        let ySpeed = 5;
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function animate() {
+            x += xSpeed;
+            y += ySpeed;
+
+            // Check for collision with the screen edges
+            if (x + box.clientWidth > window.innerWidth || x < 0) {
+                xSpeed *= -1;
+                box.style.backgroundColor = getRandomColor(); // Change color on bounce
+            }
+            if (y + box.clientHeight > window.innerHeight || y < 0) {
+                ySpeed *= -1;
+                box.style.backgroundColor = getRandomColor(); // Change color on bounce
+            }
+
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

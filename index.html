@@ -6,6 +6,8 @@
         body {
             margin: 0;
             overflow: hidden;
+            background-color: white; /* Initialize background color */
+            color: black; /* Initialize text color */
         }
         #box {
             width: 100px;
@@ -20,12 +22,20 @@
             transform: translateX(-50%);
             font-size: 18px;
         }
+        #color-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div id="back-link">
         <a href="https://yaboi870.github.io/Ultraclip/">BACK</a>
     </div>
+    <div id="color-toggle" onclick="toggleColors()">(Toggle Dark mode)</div>
     <div id="box"></div>
 
     <script>
@@ -34,6 +44,7 @@
         let y = 0;
         let xSpeed = 5;
         let ySpeed = 5;
+        let colorsToggled = false;
 
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
@@ -42,6 +53,16 @@
                 color += letters[Math.floor(Math.random() * 16)];
             }
             return color;
+        }
+
+        function toggleColors() {
+            const body = document.body;
+            const textColor = colorsToggled ? 'black' : 'white';
+            const bgColor = colorsToggled ? 'white' : 'black';
+
+            body.style.color = textColor;
+            body.style.backgroundColor = bgColor;
+            colorsToggled = !colorsToggled;
         }
 
         function animate() {
